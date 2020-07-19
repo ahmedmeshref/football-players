@@ -2,16 +2,13 @@ let selectItem = (selector, parent=document) => {
     return parent.querySelector(selector);
 }
 
-
 let selectItems = (selector, parent=document) => {
     return parent.querySelectorAll(selector);
 }
 
 const app = {
     navigation_menu: selectItem("ul#navbar__list"),
-    sections: selectItems("main > section"),
     page_components: selectItems("main > section, header.main__hero"),
-    main: selectItem("main")
 }
 
 // --------------------------------------------------------------------------------------------------------------
@@ -47,6 +44,7 @@ let append_item = (parent, child) => {
     parent.appendChild(child);
 }
 
+
 let build_nav = () => {
     let fragment = create_fragment();
     // loop over the main components of the page and create a nav-item for each
@@ -59,7 +57,10 @@ let build_nav = () => {
     append_item(app.navigation_menu, fragment);
 }
 
+start = performance.now();
 build_nav();
+end = performance.now();
+console.log(`It took ${end - start} to build`);
 
 
 // --------------------------------------------------------------------------------------------------------------

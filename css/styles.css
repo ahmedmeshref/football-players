@@ -62,7 +62,7 @@ main {
 section {
     position: relative;
     min-height: 80vh;
-    opacity: .5;
+    opacity: .3;
 }
 
 section.active {
