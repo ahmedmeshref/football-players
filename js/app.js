@@ -1,10 +1,10 @@
-let selectItem = (selector) => {
-    return document.querySelector(selector);
+let selectItem = (selector, parent=document) => {
+    return parent.querySelector(selector);
 }
 
 
-let selectItems = (selector) => {
-    return document.querySelectorAll(selector);
+let selectItems = (selector, parent=document) => {
+    return parent.querySelectorAll(selector);
 }
 
 const app = {
@@ -33,6 +33,8 @@ let create_li = (content, id) => {
         <a href='#${id}'>${content}</a>
     `
     liItem.className = `nav-item ${id}-link`
+    // select home li-nav item by default
+    if (content === 'Home') liItem.classList.add('selected');
     return liItem;
 }
 
@@ -61,8 +63,7 @@ build_nav();
 
 
 // --------------------------------------------------------------------------------------------------------------
-// Activate nax-items for viewed sections
-// TODO: FIX TEH SCROLLING system to work with section per scroll system
+// Activate nav-item and section in viewPort
 // --------------------------------------------------------------------------------------------------------------
 
 /**
@@ -88,20 +89,41 @@ let add_class = (element, className) => {
     element.classList.add(className);
 }
 
-let change_active_section = (section) => {
+/**
+ * activate changes the activation of two HTML elements by removing activation from currentActive element and adding it
+ *  to toActivate element
+ * @param currentActive {HTMLElement}
+ * @param toActivate {HTMLElement}
+ * @param activationClass {String}
+ */
+let activate = (currentActive, toActivate, activationClass) => {
+    if (currentActive) remove_class(currentActive, activationClass);
+    add_class(toActivate, activationClass);
+}
+
+let activate_navItem = (selected_section, viewed_section) => {
+    let viewed_navItem = selectItem(`li.${viewed_section.id}-link`),
+        selected_navItem = selectItem(`li.${selected_section.id}-link`);
+    activate(selected_navItem, viewed_navItem, 'selected');
+}
+
+/**
+ * change_active_section activates the current viewed section
+ * @param viewed_section {HTMLElement}
+ */
+let activate_section = (viewed_section) => {
     // get current_selected section if any
-    let selected_navItem = selectItem("li.nav-item.selected"),
-        viewed_navItem = selectItem(`li.${section.id}-link`);
-    if (selected_navItem !== viewed_navItem){
-        if (selected_navItem) remove_class(selected_navItem, 'selected');
-        add_class(viewed_navItem, 'selected');
+    let selected_section = selectItem("section.active, header.active");
+    if (selected_section !== viewed_section) {
+        activate_navItem(selected_section, viewed_section);
+        activate(selected_section, viewed_section, 'active');
     }
 }
 
 let handler = () => {
     app.page_components.forEach((section) => {
         if (isInViewport(section)) {
-            change_active_section(section);
+            activate_section(section);
         }
     })
 }

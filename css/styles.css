@@ -7,6 +7,9 @@
  * To learn more, visit: https://css-tricks.com/reboot-resets-reasoning/
  *
 */
+html {
+    scroll-behavior: smooth;
+}
 
 
 /* ---- Base Rules ---- */
@@ -55,9 +58,16 @@ main {
     padding-top: 3em;
 }
 
+
 section {
     position: relative;
     min-height: 80vh;
+    opacity: .5;
+}
+
+section.active {
+    visibility: visible;
+    opacity: 1;
 }
 
 
