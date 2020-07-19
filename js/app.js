@@ -9,12 +9,14 @@ let selectItems = (selector, parent=document) => {
 const app = {
     navigation_menu: selectItem("ul#navbar__list"),
     page_components: selectItems("main > section, header.main__hero"),
+    navigate_top: selectItem("div.navigate-top"),
+    navigate_top_btn: selectItem("button.navigate-top-btn")
 }
 
 // --------------------------------------------------------------------------------------------------------------
 // build nav bar
 // --------------------------------------------------------------------------------------------------------------
-let create_fragment = () => {
+let createFragment = () => {
     return document.createDocumentFragment();
 }
 
@@ -24,7 +26,7 @@ let create_fragment = () => {
  * @param id {Integer}
  * @returns {HTMLLIElement}
  */
-let create_li = (content, id) => {
+let createLiItem = (content, id) => {
     let liItem = document.createElement('li');
     liItem.innerHTML = `
         <a href='#${id}'>${content}</a>
@@ -40,21 +42,21 @@ let create_li = (content, id) => {
  * @param parent {DocumentFragment}
  * @param child {HTMLLIElement}
  */
-let append_item = (parent, child) => {
+let appendItem = (parent, child) => {
     parent.appendChild(child);
 }
 
 
 let build_nav = () => {
-    let fragment = create_fragment();
+    let fragment = createFragment();
     // loop over the main components of the page and create a nav-item for each
     app.page_components.forEach((section) => {
         let content = section.getAttribute('data-nav'),
             id = section.id,
-            newLiItem = create_li(content, id);
-        append_item(fragment, newLiItem);
+            newLiItem = createLiItem(content, id);
+        appendItem(fragment, newLiItem);
     })
-    append_item(app.navigation_menu, fragment);
+    appendItem(app.navigation_menu, fragment);
 }
 
 start = performance.now();
@@ -82,11 +84,11 @@ let isInViewport = (element) => {
     );
 }
 
-let remove_class = (element, className) => {
+let removeClass = (element, className) => {
     element.classList.remove(className);
 }
 
-let add_class = (element, className) => {
+let addClass = (element, className) => {
     element.classList.add(className);
 }
 
@@ -98,8 +100,8 @@ let add_class = (element, className) => {
  * @param activationClass {String}
  */
 let activate = (currentActive, toActivate, activationClass) => {
-    if (currentActive) remove_class(currentActive, activationClass);
-    add_class(toActivate, activationClass);
+    if (currentActive) removeClass(currentActive, activationClass);
+    addClass(toActivate, activationClass);
 }
 
 let activate_navItem = (selected_section, viewed_section) => {
@@ -137,20 +139,23 @@ window.addEventListener('scroll', handler, true);
 
 
 // --------------------------------------------------------------------------------------------------------------
-// Add a home button once the user reaches the end of my page
+// Add a home button once the user reaches the end of the page
 // --------------------------------------------------------------------------------------------------------------
 
-let scrollToTop = () => {
+let navigateHome = () => {
     document.body.scrollTop = 0; // For Safari
     document.documentElement.scrollTop = 0;
+    // hide the scroll to home button
+    addClass(app.navigate_top, 'hidden')
 }
 
 window.onscroll = function(ev) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-
+        // show the scroll to home button
+        removeClass(app.navigate_top, 'hidden')
     }
 };
 
-
+app.navigate_top_btn.addEventListener('click', navigateHome);
 
 

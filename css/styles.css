@@ -265,9 +265,9 @@ div.navigate-top {
     text-align: center;
 }
 
-/*div.hidden {*/
-/*    visibility: hidden;*/
-/*}*/
+div.hidden {
+    visibility: hidden;
+}
 
 button.navigate-top-btn {
     background-color: rgba(0, 0, 0, .5);
