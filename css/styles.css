@@ -21,7 +21,6 @@ body {
     color: #fff;
 }
 
-
 /* Typeography General*/
 h1 {
     font-family: 'Fira Sans', sans-serif;
@@ -46,6 +45,23 @@ h2 {
 p {
     line-height: 1.6em;
     color: #eee;
+}
+
+/* ---- Scroll bar ---- */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 /* ---- Layout Rules ---- */
@@ -240,4 +256,36 @@ section.your-active-class .landing__container::after {
 
 .selected a{
     color: red;
+}
+
+/* Navigate to home */
+div.navigate-top {
+    margin-right: 2%;
+    height: 30px;
+    text-align: center;
+}
+
+/*div.hidden {*/
+/*    visibility: hidden;*/
+/*}*/
+
+button.navigate-top-btn {
+    background-color: rgba(0, 0, 0, .5);
+    border: none;
+    width: 500px;
+    height: 70px;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 60px;
+    text-align: center;
+}
+
+button.navigate-top-btn:hover {
+    background-color: rgba(0, 0, 0, .8);
+    font-size: 62px;
+    cursor: pointer;
+}
+
+button.navigate-top-btn:focus {
+    outline: none;
 }

@@ -136,4 +136,21 @@ window.addEventListener('scroll', handler, true);
 
 
 
+// --------------------------------------------------------------------------------------------------------------
+// Add a home button once the user reaches the end of my page
+// --------------------------------------------------------------------------------------------------------------
+
+let scrollToTop = () => {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0;
+}
+
+window.onscroll = function(ev) {
+    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+
+    }
+};
+
+
+
 
