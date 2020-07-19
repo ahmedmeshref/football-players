@@ -274,15 +274,20 @@ button.navigate-top-btn {
     border: none;
     width: 500px;
     height: 70px;
-    color: #fff;
     border-radius: 10px;
-    font-size: 60px;
     text-align: center;
+    line-height: 70px;
+}
+
+button.navigate-top-btn span{
+    color: #fff;
+    font-size: 50px;
+
 }
 
 button.navigate-top-btn:hover {
     background-color: rgba(0, 0, 0, .8);
-    font-size: 62px;
+    font-size: 52px;
     cursor: pointer;
 }
 
