@@ -85,14 +85,8 @@ app.navigation_menu.addEventListener('click', redirect)
  * @param element
  * @returns {boolean|boolean}
  */
-let isInViewport = (element) => {
-    const rect = element.getBoundingClientRect();
-    return (
-        rect.top < (window.pageYOffset + window.innerHeight) &&
-        rect.left < (window.pageXOffset + window.innerWidth) &&
-        (rect.top + rect.height) > window.pageYOffset &&
-        (rect.left + rect.width) > window.pageXOffset
-    );
+let isInViewport = (ele) => {
+    return window.pageYOffset  >= ele.offsetTop-100;
 }
 
 let removeClass = (element, className) => {
@@ -136,7 +130,7 @@ let activate_section = (viewed_section) => {
 
 let handler = () => {
     app.sections.forEach((section) => {
-        if (window.pageYOffset  >= section.offsetTop-100){
+        if (isInViewport(section)){
             activate_section(section);
         }
     })
