@@ -2,7 +2,9 @@
 
 A single-page website shows information about the most famous football players in the world.
 
-## Table of Contents
+## Getting Started 
+
+- Clone project repository by running ``. 
 
 * [Instructions](#instructions)
 

@@ -29,12 +29,10 @@ let createFragment = () => {
  */
 let createLiItem = (content, id) => {
     let liItem = document.createElement('li');
-    // liItem.innerHTML = `
-    //     <a href='#${id}'>${content}</a>
-    // `
     liItem.textContent = content;
-    liItem.className = `nav-item`
-    liItem.id = `${id}-link`
+    liItem.className = `nav-item`;
+    if (content === "Home") liItem.classList.add('selected');
+    liItem.id = `${id}-link`;
     return liItem;
 }
 
