@@ -58,11 +58,7 @@ let build_nav = () => {
     appendItem(app.navigation_menu, fragment);
 }
 
-start = performance.now();
 build_nav();
-end = performance.now();
-console.log(`It took ${end - start} to build`);
-
 
 // --------------------------------------------------------------------------------------------------------------
 // Redirect to a specific section once navItem is clicked
