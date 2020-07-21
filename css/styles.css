@@ -8,19 +8,22 @@
  *
 */
 
+html {
+    scroll-behavior: smooth;
+}
 
 /* ---- Base Rules ---- */
 body {
     background: rgb(136,203,171);
     background: linear-gradient(0deg, rgba(136,203,171,1) 0%, rgba(0,13,60,1) 100%);
     margin: 0;
-    font-family: 'Merriweather', serif;
+    font-family: 'H', 'Trebuchet MS', Helvetica;
     color: #fff;
 }
 
 /* Typeography General*/
 h1 {
-    font-family: 'Fira Sans', sans-serif;
+    /*font-family: 'Fira Sans', sans-serif;*/
     font-size: 3em;
     margin: 2em 1rem;
 }
@@ -42,6 +45,10 @@ h2 {
 p {
     line-height: 1.6em;
     color: #eee;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* ---- Scroll bar ---- */
@@ -87,6 +94,8 @@ section.active {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
+
+
 .navbar__menu ul {
     padding-left: 0;
     margin: 0;
@@ -95,11 +104,22 @@ section.active {
 
 .navbar__menu li {
     display: inline-block;
+    cursor: pointer;
+    margin-right: 10px;
+    color: black;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+.navbar__menu li.selected{
+    color: #fff;
+    background-color: rgba(0, 0, 0, .8);
+    font-weight: bold;
 }
 
 .navbar__menu .menu__link {
     display: block;
-    padding: 1em;
+    height: 40px;
     font-weight: bold;
     text-decoration: none;
     color: #000;
@@ -245,14 +265,19 @@ section.your-active-class .landing__container::after {
 	}
 }
 
-
 .nav-item a{
     margin-right: 10px;
+    color: black;
+    padding: 10px;
+    line-height: 40px;
+    border-radius: 3px;
 }
 
 
 .selected a{
-    color: red;
+    color: #fff;
+    background-color: rgba(0, 0, 0, .8);
+    font-weight: bold;
 }
 
 /* Navigate to home */

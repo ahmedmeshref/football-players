@@ -1,13 +1,14 @@
-let selectItem = (selector, parent=document) => {
+let selectItem = (selector, parent = document) => {
     return parent.querySelector(selector);
 }
 
-let selectItems = (selector, parent=document) => {
+let selectItems = (selector, parent = document) => {
     return parent.querySelectorAll(selector);
 }
 
 const app = {
     navigation_menu: selectItem("ul#navbar__list"),
+    sections: selectItems("main > section"),
     page_components: selectItems("main > section, header.main__hero"),
     navigate_top: selectItem("div.navigate-top"),
     navigate_top_btn: selectItem("button.navigate-top-btn")
@@ -28,12 +29,12 @@ let createFragment = () => {
  */
 let createLiItem = (content, id) => {
     let liItem = document.createElement('li');
-    liItem.innerHTML = `
-        <a href='#${id}'>${content}</a>
-    `
-    liItem.className = `nav-item ${id}-link`
-    // select home li-nav item by default
-    if (content === 'Home') liItem.classList.add('selected');
+    // liItem.innerHTML = `
+    //     <a href='#${id}'>${content}</a>
+    // `
+    liItem.textContent = content;
+    liItem.className = `nav-item`
+    liItem.id = `${id}-link`
     return liItem;
 }
 
@@ -50,7 +51,7 @@ let appendItem = (parent, child) => {
 let build_nav = () => {
     let fragment = createFragment();
     // loop over the main components of the page and create a nav-item for each
-    app.page_components.forEach((section) => {
+    app.sections.forEach((section) => {
         let content = section.getAttribute('data-nav'),
             id = section.id,
             newLiItem = createLiItem(content, id);
@@ -63,6 +64,23 @@ start = performance.now();
 build_nav();
 end = performance.now();
 console.log(`It took ${end - start} to build`);
+
+
+// --------------------------------------------------------------------------------------------------------------
+// Redirect to a specific section once navItem is clicked
+// --------------------------------------------------------------------------------------------------------------
+
+let redirect = (e) => {
+    if (e.target && e.target.nodeName === 'LI'){
+        // extract the section id from the clicked navItem id
+        let redirectTo = e.target.id.split("-")[0];
+        // navigate to the desired section
+        window.location.href = `#${redirectTo}`;
+    }
+}
+
+
+app.navigation_menu.addEventListener('click', redirect)
 
 
 // --------------------------------------------------------------------------------------------------------------
@@ -105,8 +123,8 @@ let activate = (currentActive, toActivate, activationClass) => {
 }
 
 let activate_navItem = (selected_section, viewed_section) => {
-    let viewed_navItem = selectItem(`li.${viewed_section.id}-link`),
-        selected_navItem = selectItem(`li.${selected_section.id}-link`);
+    let viewed_navItem = selectItem(`li#${viewed_section.id}-link`),
+        selected_navItem = selectItem(`li#${selected_section.id}-link`);
     activate(selected_navItem, viewed_navItem, 'selected');
 }
 
@@ -137,7 +155,6 @@ window.addEventListener('resize', handler, true);
 window.addEventListener('scroll', handler, true);
 
 
-
 // --------------------------------------------------------------------------------------------------------------
 // Add a home button once the user reaches the end of the page
 // --------------------------------------------------------------------------------------------------------------
@@ -149,13 +166,14 @@ let navigateHome = () => {
     addClass(app.navigate_top, 'hidden')
 }
 
-window.onscroll = function(ev) {
+window.onscroll = function (ev) {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         // show the scroll to home button
         removeClass(app.navigate_top, 'hidden')
     }
 };
 
+// listen for click on the navigation button
 app.navigate_top_btn.addEventListener('click', navigateHome);
 
 
