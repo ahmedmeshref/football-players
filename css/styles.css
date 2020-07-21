@@ -47,10 +47,6 @@ p {
     color: #eee;
 }
 
-a {
-    text-decoration: none;
-}
-
 /* ---- Scroll bar ---- */
 ::-webkit-scrollbar {
     width: 10px;
@@ -263,21 +259,6 @@ section.your-active-class .landing__container::after {
 		           translate(-1em) 
 		           rotate(-360deg);
 	}
-}
-
-.nav-item a{
-    margin-right: 10px;
-    color: black;
-    padding: 10px;
-    line-height: 40px;
-    border-radius: 3px;
-}
-
-
-.selected a{
-    color: #fff;
-    background-color: rgba(0, 0, 0, .8);
-    font-weight: bold;
 }
 
 /* Navigate to home */
