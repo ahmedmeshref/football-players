@@ -9,7 +9,6 @@ let selectItems = (selector, parent = document) => {
 const app = {
     navigation_menu: selectItem("ul#navbar__list"),
     sections: selectItems("main > section"),
-    page_components: selectItems("main > section, header.main__hero"),
     navigate_top: selectItem("div.navigate-top"),
     navigate_top_btn: selectItem("button.navigate-top-btn")
 }
@@ -89,10 +88,10 @@ app.navigation_menu.addEventListener('click', redirect)
 let isInViewport = (element) => {
     const rect = element.getBoundingClientRect();
     return (
-        rect.top >= 0 &&
-        rect.left >= 0 &&
-        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+        rect.top < (window.pageYOffset + window.innerHeight) &&
+        rect.left < (window.pageXOffset + window.innerWidth) &&
+        (rect.top + rect.height) > window.pageYOffset &&
+        (rect.left + rect.width) > window.pageXOffset
     );
 }
 
@@ -136,8 +135,8 @@ let activate_section = (viewed_section) => {
 }
 
 let handler = () => {
-    app.page_components.forEach((section) => {
-        if (isInViewport(section)) {
+    app.sections.forEach((section) => {
+        if (window.pageYOffset  >= section.offsetTop-100){
             activate_section(section);
         }
     })
