@@ -10,7 +10,11 @@ A single-page website shows information about the most famous football players i
 
 ### Run 
 
-- navigate to your repository and run index.html on your favourite browser. 
+- navigate to your repository and run index.html on your favourite browser.
+
+## Host 
+
+This app is hosted on github page `https://ahmedmeshref.github.io/football-players-info/`.
 
 
 # Author 
